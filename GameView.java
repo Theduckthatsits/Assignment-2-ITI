@@ -16,6 +16,10 @@ public class GameView extends JFrame {
 
      // ADD YOUR INSTANCE VARIABLES HERE
 
+    private DotButton[][] board;
+    private GameModel gameModel;
+    private javax.swing.JLabel nbreOfStepsLabel;
+
     /**
      * Constructor used for initializing the Frame
      * 
@@ -29,6 +33,35 @@ public class GameView extends JFrame {
         
     // ADD YOU CODE HERE
 
+        JFrame f = new JFrame("MineSweeper it -- the ITI 1121 version");
+        f.setSize(500,500);
+
+        // For minesweeper matrix
+        JPanel p1 = new JPanel();
+        p1.setLayout(new GridLayout(1,2)); // Fix this
+
+
+        // For buttons and text field
+        JPanel p2 = new JPanel();
+
+        JButton b1 = new JButton("Reset");
+        b1.addActionListener(this); // FIX
+        
+        JButton b2 = new JButton("Quit");
+        b2.addActionListener(this); // FIX
+
+        JTextField f1 = new JTextField("Number of steps: ");
+        f1.setEditable(false);
+
+        p2.add(f1);
+        p2.add(b1);
+        p2.add(b2);
+        
+
+        f.add(p1, BorderLayout.NORTH);
+        f.add(p2, BorderLayout.SOUTH);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
     }
 
     /**

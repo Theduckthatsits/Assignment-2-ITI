@@ -18,6 +18,9 @@ public class GameController implements ActionListener {
 
     // ADD YOUR INSTANCE VARIABLES HERE
 
+    private GameView gameView;
+    private GameModel gameModel;
+
     /**
      * Constructor used for initializing the controller. It creates the game's view 
      * and the game's model instances
@@ -32,6 +35,9 @@ public class GameController implements ActionListener {
     public GameController(int width, int height, int numberOfMines) {
 
     // ADD YOU CODE HERE
+
+        gameModel = new GameModel(width, height, numberOfMines);
+        gameView = new GameView(gameModel, GameController); // Check 2nd parameter
 
     }
 
