@@ -20,6 +20,10 @@ public class GameModel {
 
      // ADD YOUR INSTANCE VARIABLES HERE
 
+    private int widthOfGame,heigthOfGame,numberOfMines,numberOfSteps,numberUncovered;
+    private DotInfo[][] model;
+    private Random generator;
+
     /**
      * Constructor to initialize the model to a given size of board.
      * 
@@ -35,6 +39,17 @@ public class GameModel {
     public GameModel(int width, int heigth, int numberOfMines) {
         
     // ADD YOU CODE HERE
+
+        this.widthOfGame=width;
+        this.heigthOfGame=heigth;
+        this.numberOfMines=numberOfMines;
+
+        numberOfSteps=0;
+        numberUncovered=0;
+        
+        model = new DotInfo[widthOfGame][heigthOfGame];
+
+        generator = new Random();
 
     }
 
@@ -62,6 +77,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return heigthOfGame;
+
     }
 
     /**
@@ -72,6 +89,8 @@ public class GameModel {
     public int getWidth(){
         
     // ADD YOU CODE HERE
+
+        return widthOfGame;
 
     }
 
@@ -90,6 +109,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return model[i][j].isMined();
+
     }
 
     /**
@@ -105,6 +126,8 @@ public class GameModel {
     public boolean hasBeenClicked(int i, int j){
         
     // ADD YOU CODE HERE
+
+        return model[i][j].hasBeenClicked();
 
     }
 
@@ -122,6 +145,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return model[i][j].getNeighbooringMines()==0;
+
     }
     /**
      * returns true if the dot is covered, false otherwise
@@ -135,6 +160,8 @@ public class GameModel {
     public boolean isCovered(int i, int j){
         
     // ADD YOU CODE HERE
+
+        return model[i][j].isCovered();
 
     }
 
@@ -152,6 +179,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return model[i][j].getNeighbooringMines();
+
     }
 
 
@@ -167,6 +196,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        model[i][j].uncover();
+
     }
 
     /**
@@ -181,6 +212,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        model[i][j].click();
+
     }
      /**
      * Uncover all remaining covered dot
@@ -188,6 +221,20 @@ public class GameModel {
     public void uncoverAll(){
         
     // ADD YOU CODE HERE
+
+        for (int i=0; i<widthOfGame; i++) {
+
+            for (int j=0; j<heigthOfGame; j++) {
+
+                if (model[i][j].isCovered()==true) {
+
+                    model[i][j].uncover();
+                    
+                }
+                
+            }
+            
+        }
 
     }
 
@@ -201,6 +248,8 @@ public class GameModel {
     public int getNumberOfSteps(){
         
     // ADD YOU CODE HERE
+
+        return numberOfSteps;
 
     }
 
@@ -221,6 +270,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return model[i][j];
+
     }
 
 
@@ -231,6 +282,8 @@ public class GameModel {
      public void step(){
         
     // ADD YOU CODE HERE
+
+        numberOfSteps++;
 
     }
  
@@ -244,6 +297,8 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        return 
+
     }
 
 
@@ -255,6 +310,8 @@ public class GameModel {
     public String toString(){
         
     // ADD YOU CODE HERE
+
+        return 
 
     }
 }
