@@ -64,6 +64,9 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+    	numberOfSteps=0;
+    	numberUncovered=0;
+    	model = new DotInfo[widthOfGame][heigthOfGame];
 
     }
 
@@ -297,7 +300,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return 
+        return (widthOfGame*heigthOfGame-numberOfMines)==numberUncovered;
 
     }
 

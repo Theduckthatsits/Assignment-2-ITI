@@ -53,6 +53,17 @@ public class GameController implements ActionListener {
         
     // ADD YOU CODE HERE
 
+    	if (e.getActionCommand().equals("Reset")) {
+
+			//;
+		}
+
+
+    	if (e.getActionCommand().equals("Quit")) {
+
+			//;
+		}
+
     }
 
     /**
