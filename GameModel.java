@@ -47,7 +47,7 @@ public class GameModel {
         numberOfSteps=0;
         numberUncovered=0;
         
-        model = new DotInfo[widthOfGame][heigthOfGame];
+        model = new DotInfo[heigthOfGame][widthOfGame];
 
         generator = new Random();
 
@@ -66,7 +66,7 @@ public class GameModel {
 
     	numberOfSteps=0;
     	numberUncovered=0;
-    	model = new DotInfo[widthOfGame][heigthOfGame];
+    	model = new DotInfo[heigthOfGame][widthOfGame];
 
     }
 
@@ -313,8 +313,22 @@ public class GameModel {
     public String toString(){
         
     // ADD YOU CODE HERE
-
-        return 
+        char[][] temp = new char[heigthOfGame][widthOfGame] 
+        for (int i=0, i<heigthOfGame, i++){
+            for int j=0, i<widthOfGame, i++){
+                if(model[i][j].isCovered()){
+                    temp[i][j] = "*"
+                else{
+                    if(model[i][j].isMined()){
+                        temp[i][j] = "x"
+                    }
+                    else{
+                        temp[i][j] = "O"
+                    }
+                }
+            }
+        }
+        return
 
     }
 }
