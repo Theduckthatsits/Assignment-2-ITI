@@ -47,9 +47,11 @@ public class GameModel {
         numberOfSteps=0;
         numberUncovered=0;
         
-        model = new DotInfo[heigthOfGame][widthOfGame];
+        model = new DotInfo[widthOfGame][heigthOfGame];
 
         generator = new Random();
+
+        reset();
 
     }
 
@@ -66,8 +68,62 @@ public class GameModel {
 
     	numberOfSteps=0;
     	numberUncovered=0;
-    	model = new DotInfo[heigthOfGame][widthOfGame];
+    	model = new DotInfo[widthOfGame][heigthOfGame];
 
+        // Initializing model Array with Dots
+        for (int i=0; i<widthOfGame; i++) {
+
+            for (int j=0; j<heigthOfGame; j++) {
+
+                model[i][j]= new DotInfo(i,j);
+                
+            }
+        }
+
+        // Assigning random mines
+        for (int s=0; s<numberOfMines ; s++) {
+
+            // Generating random x and y values
+            int x=random.nextInt();
+            int y=random.nextInt();
+
+            // If the random point (x,y) doesn't contain a mine, place a mine
+            // This is done because the generator might generate a point that has already been mined before
+            if (!(model[i][j].isMined())) {
+
+                model[i][j].setMined();
+                
+            }   
+        }
+
+        // For loops used to count the number of neighboring mines for a non-mined point
+        for (int i=0; i<widthOfGame; i++) {
+
+            for (int j=0; j<heigthOfGame; j++) {
+
+                if (!(model[i][j].isMined())) {
+
+                    int neighbMines=0;
+
+                    for (int a=i-1; a<i+2; a++) {
+
+                        for (int b=j-1; b<j+2; b++) {
+
+                            if (a>=0 && b>=0 && a<widthOfGame && b<heigthOfGame) {
+
+                                if (model[a][b].isMined()) {
+
+                                    neighbMines++;
+                                    
+                                }   
+                            }
+                        }
+                    } 
+                }
+
+                model[i][j].setNeighboringMines(neighbMines);
+            }
+        }
     }
 
 
@@ -229,16 +285,13 @@ public class GameModel {
 
             for (int j=0; j<heigthOfGame; j++) {
 
-                if (model[i][j].isCovered()==true) {
+                if (model[i][j].isCovered()) {
 
                     model[i][j].uncover();
                     
                 }
-                
             }
-            
         }
-
     }
 
  
@@ -313,22 +366,25 @@ public class GameModel {
     public String toString(){
         
     // ADD YOU CODE HERE
-        char[][] temp = new char[heigthOfGame][widthOfGame] 
-        for (int i=0, i<heigthOfGame, i++){
-            for int j=0, i<widthOfGame, i++){
-                if(model[i][j].isCovered()){
-                    temp[i][j] = "*"
-                else{
-                    if(model[i][j].isMined()){
-                        temp[i][j] = "x"
-                    }
-                    else{
-                        temp[i][j] = "O"
-                    }
+
+        String temp="";
+
+        for (; ; ) {
+
+            for (; ; ) {
+
+                if () {
+                    
                 }
+
+                else if () {
+                    
+                }
+
+                else if () {
+                    
+                }       
             }
         }
-        return
-
     }
 }
