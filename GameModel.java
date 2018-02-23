@@ -51,6 +51,7 @@ public class GameModel {
 
         generator = new Random();
 
+        // Called for initiating the game
         reset();
 
     }
@@ -84,8 +85,8 @@ public class GameModel {
         for (int s=0; s<numberOfMines ; s++) {
 
             // Generating random x and y values
-            int x=random.nextInt();
-            int y=random.nextInt();
+            int i=generator.nextInt(widthOfGame);
+            int j=generator.nextInt(heigthOfGame);
 
             // If the random point (x,y) doesn't contain a mine, place a mine
             // This is done because the generator might generate a point that has already been mined before
@@ -96,21 +97,25 @@ public class GameModel {
             }   
         }
 
-        // For loops used to count the number of neighboring mines for a non-mined point
+        // For loops used to count the number of neighboring mines for a non-mined tile
         for (int i=0; i<widthOfGame; i++) {
 
             for (int j=0; j<heigthOfGame; j++) {
 
+                // If the tile is not mined, get the number of neighboring mines
                 if (!(model[i][j].isMined())) {
 
+                    // Used to store the number of neigboring mines
                     int neighbMines=0;
 
+                    // We need to check the tiles to the left, right, above and below the current tile
                     for (int a=i-1; a<i+2; a++) {
 
                         for (int b=j-1; b<j+2; b++) {
 
                             if (a>=0 && b>=0 && a<widthOfGame && b<heigthOfGame) {
 
+                                // If the tile is mined, increment neighbMines by 1
                                 if (model[a][b].isMined()) {
 
                                     neighbMines++;
@@ -118,10 +123,12 @@ public class GameModel {
                                 }   
                             }
                         }
-                    } 
-                }
+                    }
 
-                model[i][j].setNeighboringMines(neighbMines);
+                    // Setting the number of neighboring mines for that specific tile
+                    model[i][j].setNeighbooringMines(neighbMines);
+
+                }
             }
         }
     }
@@ -353,8 +360,27 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return (widthOfGame*heigthOfGame-numberOfMines)==numberUncovered;
+        boolean temp = false;
 
+        for (int i=0; i<widthOfGame; i++) {
+
+            for (int j=0; j<widthOfGame; j++) {
+
+                // If the tile is not mined and uncovered
+                if (!(model[i][j].isMined()) && !(model[i][j].isCovered())) {
+
+                    temp=true;
+                    
+                }
+
+                // If one or both of the conditions fail
+                else {
+                    temp=false;
+                }
+            }
+        }
+
+        return temp;
     }
 
 
@@ -367,24 +393,39 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
+        // Used to store the tiles
         String temp="";
 
-        for (; ; ) {
+        for (int j=0; j<widthOfGame; j++) {
 
-            for (; ; ) {
+            for (int i=0; i<heigthOfGame; i++) {
 
-                if () {
+                // If the tile is covered
+                if (model[i][j].isCovered()) {
+
+                    temp+="* ";
+
+                }
+
+                // If the tile is uncovered and contains a mine
+                else if (!(model[i][j].isCovered()) && model[i][j].isMined()) {
+
+                    temp+="x ";
                     
                 }
 
-                else if () {
+                // If the tile is uncovered but doesnt contain a mine, displays number of neighboring mines
+                else if (!(model[i][j].isCovered()) && !(model[i][j].isMined())) {
+
+                    temp+=model[i][j].getNeighbooringMines()+" ";
                     
                 }
 
-                else if () {
-                    
-                }       
+                // Indent a line after each row is added to variable temp
+                temp+="\n";       
             }
         }
+
+        return temp;
     }
 }
