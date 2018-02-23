@@ -37,7 +37,6 @@ public class GameController implements ActionListener {
     // ADD YOU CODE HERE
 
         gameModel = new GameModel(width, height, numberOfMines);
-        gameView = new GameView(gameModel, GameController); // Check 2nd parameter
 
     }
 
@@ -55,7 +54,7 @@ public class GameController implements ActionListener {
 
     	if (e.getActionCommand().equals("Reset")) {
 
-			//;
+			gameModel.reset();
 		}
 
 
@@ -72,6 +71,8 @@ public class GameController implements ActionListener {
     private void reset(){
 
     // ADD YOU CODE HERE
+
+        gameModel.reset();
 
     }
 

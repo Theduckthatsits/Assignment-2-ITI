@@ -33,22 +33,24 @@ public class GameView extends JFrame {
         
     // ADD YOU CODE HERE
 
+        this.gameModel=gameModel;
+
         JFrame f = new JFrame("MineSweeper it -- the ITI 1121 version");
         f.setSize(500,500);
 
         // For minesweeper matrix
         JPanel p1 = new JPanel();
-        p1.setLayout(new GridLayout(1,2)); // Fix this
+        p1.setLayout(new GridLayout(gameModel.getWidth(),gameModel.getHeigth())); // Fix this
 
 
         // For buttons and text field
         JPanel p2 = new JPanel();
 
         JButton b1 = new JButton("Reset");
-        b1.addActionListener(this); // FIX
+        b1.addActionListener(); // FIX
         
         JButton b2 = new JButton("Quit");
-        b2.addActionListener(this); // FIX
+        b2.addActionListener(); // FIX
 
         JTextField f1 = new JTextField("Number of steps: ");
         f1.setEditable(false);
@@ -88,6 +90,35 @@ public class GameView extends JFrame {
     private int getIcon(int i, int j){
         
     // ADD YOU CODE HERE
+
+        // Case 11 (unopened fields)
+        if (gameModel.isCovered(i,j)) {
+
+            return 11;
+
+        }
+
+        // Case 10 (user presses on a field that is mined)
+        else if (gameModel.hasBeenClicked(i,j) && gameModel.isMined(i,j)) {
+
+            return 10;
+
+        }
+
+        else if (gameModel.isMined(i,j)) {
+
+            return 9;
+            
+        }
+
+        // Case 0 to 8 (user presses on a field that is not mined and program displays neighboring mines)
+        else {
+
+            return gameModel.getNeighbooringMines(i,j);
+
+        }
+
+        // CASE 12 BONUS
 
     }
 

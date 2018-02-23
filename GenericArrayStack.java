@@ -5,6 +5,8 @@ public class GenericArrayStack<E> implements Stack<E> {
     private E[] elems;
     private int top;
 
+    @SuppressWarnings( "unchecked" )
+
    // Constructor
     public GenericArrayStack( int capacity ) {
         
@@ -22,7 +24,7 @@ public class GenericArrayStack<E> implements Stack<E> {
 
     }
 
-    public void push( E elem ) {
+    public void push(E elem) {
         
     // ADD YOU CODE HERE
         elems[top]=elem;
