@@ -37,6 +37,7 @@ public class GameController implements ActionListener {
     // ADD YOU CODE HERE
 
         gameModel = new GameModel(width, height, numberOfMines);
+        gameView = new GameView(gameModel,this);
 
     }
 
@@ -54,13 +55,16 @@ public class GameController implements ActionListener {
 
     	if (e.getActionCommand().equals("Reset")) {
 
-			gameModel.reset();
+			reset();
+            System.out.println("works");
 		}
 
 
     	if (e.getActionCommand().equals("Quit")) {
 
-			//;
+			//gameView.setVisible(false); //you can't see me!
+            //gameView.dispose(); //Destroy the JFrame object
+            System.out.println("quit");
 		}
 
     }

@@ -36,33 +36,49 @@ public class GameView extends JFrame {
         this.gameModel=gameModel;
 
         JFrame f = new JFrame("MineSweeper it -- the ITI 1121 version");
-        f.setSize(500,500);
+        f.setSize(380,500);
 
         // For minesweeper matrix
         JPanel p1 = new JPanel();
-        p1.setLayout(new GridLayout(gameModel.getWidth(),gameModel.getHeigth())); // Fix this
+        p1.setLayout(new GridLayout(gameModel.getWidth(),gameModel.getHeigth(),0,0));
 
+        JButton tiles[][] = new JButton[gameModel.getWidth()][gameModel.getHeigth()];
+        //board = new DotButton[gameModel.getWidth()][gameModel.getHeigth()];
+        //board[i][j] = new DotButton(i,j,11);
+
+        for (int i=0; i<gameModel.getWidth(); i++) {
+
+            for (int j=0; j<gameModel.getHeigth(); j++) {
+
+                tiles[i][j] = new JButton(new ImageIcon("icons/MineSweeper_unopened_square.png"));
+                tiles[i][j].setSize(new Dimension(28,28));
+                tiles[i][j].setBackground(Color.WHITE);
+                p1.add(tiles[i][j]);
+                
+            }
+            
+        }
 
         // For buttons and text field
         JPanel p2 = new JPanel();
 
         JButton b1 = new JButton("Reset");
-        b1.addActionListener(); // FIX
+        b1.addActionListener(gameController);
         
         JButton b2 = new JButton("Quit");
-        b2.addActionListener(); // FIX
+        b2.addActionListener(gameController);
 
-        JTextField f1 = new JTextField("Number of steps: ");
-        f1.setEditable(false);
+        nbreOfStepsLabel = new JLabel("Number of steps: " + gameModel.getNumberOfSteps());
 
-        p2.add(f1);
+        p2.add(nbreOfStepsLabel);
         p2.add(b1);
         p2.add(b2);
         
 
-        f.add(p1, BorderLayout.NORTH);
+        f.add(p1, BorderLayout.CENTER);
         f.add(p2, BorderLayout.SOUTH);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //f.setResizable(false);
         f.setVisible(true);
     }
 
@@ -105,6 +121,7 @@ public class GameView extends JFrame {
 
         }
 
+        // Case 9 (if the field is a mine)
         else if (gameModel.isMined(i,j)) {
 
             return 9;
@@ -122,5 +139,10 @@ public class GameView extends JFrame {
 
     }
 
+    public static void main(String[] args) {
+
+        //GameView tes = new GameView(new GameModel(20,20,36), new GameController(20,20,36));
+        
+    }
 
 }

@@ -366,9 +366,8 @@ public class GameModel {
 
             for (int j=0; j<widthOfGame; j++) {
 
-                // If the tile is not mined and uncovered or mined and covered
-                if (!(model[i][j].isMined()) && !(model[i][j].isCovered()) or (model[i][j].isMined()) && (model[i][j].isCovered())) 
-                {
+                // If the tile is not mined and uncovered
+                if (!(model[i][j].isMined()) && !(model[i][j].isCovered())) {
 
                     temp=true;
                     
@@ -376,7 +375,7 @@ public class GameModel {
 
                 // If one or both of the conditions fail
                 else {
-                    return false;
+                    temp=false;
                 }
             }
         }
@@ -422,9 +421,9 @@ public class GameModel {
                     
                 }
 
-                // Indent a line after each row is added to variable temp          
+                // Indent a line after each row is added to variable temp
+                temp+="\n";       
             }
-            temp+="\n";
         }
 
         return temp;
