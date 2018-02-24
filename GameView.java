@@ -138,11 +138,4 @@ public class GameView extends JFrame {
         // CASE 12 BONUS
 
     }
-
-    public static void main(String[] args) {
-
-        //GameView tes = new GameView(new GameModel(20,20,36), new GameController(20,20,36));
-        
-    }
-
 }
