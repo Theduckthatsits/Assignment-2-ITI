@@ -81,6 +81,8 @@ public class DotButton extends JButton {
     	this.row=row;
     	this.column=column;
     	this.iconNumber=iconNumber;
+
+        setIcon(getImageIcon());
         
     }
 
@@ -102,6 +104,7 @@ public class DotButton extends JButton {
     // ADD YOU CODE HERE
 
     	this.iconNumber=iconNumber;
+        setIcon(getImageIcon());
         
     }
  

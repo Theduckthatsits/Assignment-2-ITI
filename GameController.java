@@ -53,20 +53,41 @@ public class GameController implements ActionListener {
         
     // ADD YOU CODE HERE
 
+        // If the user presses on the reset button
     	if (e.getActionCommand().equals("Reset")) {
 
-			reset();
-            System.out.println("works");
+			this.reset();
 		}
 
+        // If the user presses on the quit button
+    	else if (e.getActionCommand().equals("Quit")) {
 
-    	if (e.getActionCommand().equals("Quit")) {
-
-			//gameView.setVisible(false); //you can't see me!
-            //gameView.dispose(); //Destroy the JFrame object
-            System.out.println("quit");
+            System.exit(0);
 		}
 
+        // If the user presses on any tile (button)
+        else {
+
+            for (int i=0; i<gameModel.getWidth(); i++) {
+
+                for (int j=0; j<gameModel.getHeigth(); j++) {
+
+                    if (e.getActionCommand().equals(Integer.toString(gameModel.getWidth()*j+i))) {
+
+                        // Increments the number of steps by one
+                        gameModel.step();
+
+                        // tile is set to click and game logic applies to that tile
+                        gameModel.click(i,j);
+                        play(i,j);
+
+                        // Prints out a string representation of the board
+                        System.out.println(gameModel.toString());
+                        
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -77,6 +98,7 @@ public class GameController implements ActionListener {
     // ADD YOU CODE HERE
 
         gameModel.reset();
+        gameView.update();
 
     }
 
@@ -96,6 +118,68 @@ public class GameController implements ActionListener {
     private void play(int width, int heigth){
 
     // ADD YOU CODE HERE
+
+        Object[] options = {"Quit", "Play Again"};
+
+        // If the user presses on a tile that contains a mine, all the tiles are uncovered and the game finishes.
+        if (gameModel.isMined(width,heigth)) {
+
+            gameModel.uncoverAll();
+            gameView.update();
+
+            // Pop up window
+            int result=JOptionPane.showOptionDialog(null, "Aouch, you lost in "+Integer.toString(gameModel.getNumberOfSteps())+" steps!\nWould you like to play again?","Boom!", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+            // If the user wants to quit the game
+            if (result == JOptionPane.YES_OPTION) {
+
+                System.exit(0);
+            }
+
+            // If the user wants to play again
+            if (result == JOptionPane.NO_OPTION) {
+
+                gameModel.reset();
+                gameView.update();
+                
+            }
+        }
+
+        else if (gameModel.isCovered(width,heigth)) {
+
+            // Set the tile to clicked and uncover it
+            gameModel.click(width,heigth);
+            gameModel.uncover(width,heigth);
+
+            if (gameModel.isFinished()) {
+
+                gameModel.uncoverAll();
+                gameView.update();
+
+                // Pop up window
+                int result=JOptionPane.showOptionDialog(null,"Congratulations! You won in "+Integer.toString(gameModel.getNumberOfSteps())+" steps!\nWould you like to play again?","Won", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+                // If the user wants to quit the game
+                if (result == JOptionPane.YES_OPTION) {
+
+                    System.exit(0);
+
+                }
+
+                // If the user wants to play again
+                if (result == JOptionPane.NO_OPTION) {
+
+                    gameModel.reset();
+                    gameView.update();
+
+                }
+            }
+
+            gameView.update();
+
+            // Add clearZone code
+            
+        }
 
     }
 
