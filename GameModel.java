@@ -367,7 +367,8 @@ public class GameModel {
             for (int j=0; j<widthOfGame; j++) {
 
                 // If the tile is not mined and uncovered
-                if (!(model[i][j].isMined()) && !(model[i][j].isCovered())) {
+                if (!(model[i][j].isMined()) && !(model[i][j].isCovered()) or (model[i][j].isMined()) && (model[i][j].isCovered())) 
+                {
 
                     temp=true;
                     
@@ -375,7 +376,7 @@ public class GameModel {
 
                 // If one or both of the conditions fail
                 else {
-                    temp=false;
+                    return false;
                 }
             }
         }
