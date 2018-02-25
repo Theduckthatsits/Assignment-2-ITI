@@ -396,7 +396,6 @@ public class GameModel {
 
             for (int j=0; j<widthOfGame; j++) {
 
-                System.out.println("test");
                 // If the tile is covered
                 if (model[i][j].isCovered()) {
 
