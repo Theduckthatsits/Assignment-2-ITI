@@ -35,25 +35,32 @@ public class GameView extends JFrame {
 
         this.gameModel=gameModel;
 
-        JFrame f = new JFrame("MineSweeper it -- the ITI 1121 version");
-        f.setSize(380,500);
+        setTitle("MineSweeper it -- the ITI 1121 version");
 
         // For minesweeper matrix
         JPanel p1 = new JPanel();
-        p1.setLayout(new GridLayout(gameModel.getWidth(),gameModel.getHeigth(),0,0));
+        p1.setLayout(new GridLayout(gameModel.getHeigth(),gameModel.getWidth(),0,0));
 
-        JButton tiles[][] = new JButton[gameModel.getWidth()][gameModel.getHeigth()];
-        //board = new DotButton[gameModel.getWidth()][gameModel.getHeigth()];
-        //board[i][j] = new DotButton(i,j,11);
+        board = new DotButton[gameModel.getHeigth()][gameModel.getWidth()];
 
-        for (int i=0; i<gameModel.getWidth(); i++) {
+        // Integer temp used to store the tile's setActionCommand number so we can identify which tile is being clicked
+        int temp=0;
 
-            for (int j=0; j<gameModel.getHeigth(); j++) {
+        // Adding buttons to board matrix
+        for (int i=0; i<gameModel.getHeigth(); i++) {
 
-                tiles[i][j] = new JButton(new ImageIcon("icons/MineSweeper_unopened_square.png"));
-                tiles[i][j].setSize(new Dimension(28,28));
-                tiles[i][j].setBackground(Color.WHITE);
-                p1.add(tiles[i][j]);
+           for (int j=0; j<gameModel.getWidth(); j++) {
+
+                board[i][j] = new DotButton(j,i,11);
+
+                board[i][j].setPreferredSize(new Dimension(28,28));
+                
+                board[i][j].addActionListener(gameController);
+                board[i][j].setActionCommand(Integer.toString(temp));
+                
+                temp++;
+
+                p1.add(board[i][j]);
                 
             }
             
@@ -62,24 +69,25 @@ public class GameView extends JFrame {
         // For buttons and text field
         JPanel p2 = new JPanel();
 
-        JButton b1 = new JButton("Reset");
-        b1.addActionListener(gameController);
+        JButton reset = new JButton("Reset");
+        reset.addActionListener(gameController);
         
-        JButton b2 = new JButton("Quit");
-        b2.addActionListener(gameController);
+        JButton quit = new JButton("Quit");
+        quit.addActionListener(gameController);
 
-        nbreOfStepsLabel = new JLabel("Number of steps: " + gameModel.getNumberOfSteps());
+        nbreOfStepsLabel = new JLabel("Number of steps: " + Integer.toString(gameModel.getNumberOfSteps()));
 
         p2.add(nbreOfStepsLabel);
-        p2.add(b1);
-        p2.add(b2);
+        p2.add(reset);
+        p2.add(quit);
         
-
-        f.add(p1, BorderLayout.CENTER);
-        f.add(p2, BorderLayout.SOUTH);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //f.setResizable(false);
-        f.setVisible(true);
+        // Frame related stuff
+        add(p1, BorderLayout.NORTH);
+        add(p2, BorderLayout.SOUTH);
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false); // Window isn't resizable so it doesnt look bad when stretched out
+        setVisible(true);
     }
 
     /**
@@ -91,6 +99,20 @@ public class GameView extends JFrame {
         
     // ADD YOU CODE HERE
 
+        // Updating the number of steps label
+        nbreOfStepsLabel.setText("Number of steps: " + Integer.toString(gameModel.getNumberOfSteps()));
+   
+        // Updating the icons
+        for (int i=0; i<gameModel.getHeigth(); i++) {
+
+            for (int j=0; j<gameModel.getWidth(); j++) {
+
+                board[i][j].setIconNumber(getIcon(j,i));
+                
+            }   
+        }
+
+        pack();
     }
 
     /**
@@ -138,11 +160,4 @@ public class GameView extends JFrame {
         // CASE 12 BONUS
 
     }
-
-    public static void main(String[] args) {
-
-        //GameView tes = new GameView(new GameModel(20,20,36), new GameController(20,20,36));
-        
-    }
-
 }

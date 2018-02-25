@@ -44,13 +44,6 @@ public class GameModel {
         this.heigthOfGame=heigth;
         this.numberOfMines=numberOfMines;
 
-        numberOfSteps=0;
-        numberUncovered=0;
-        
-        model = new DotInfo[widthOfGame][heigthOfGame];
-
-        generator = new Random();
-
         // Called for initiating the game
         reset();
 
@@ -67,16 +60,19 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-    	numberOfSteps=0;
-    	numberUncovered=0;
-    	model = new DotInfo[widthOfGame][heigthOfGame];
+        numberOfSteps=0;
+        numberUncovered=0;
+        
+        model = new DotInfo[heigthOfGame][widthOfGame];
+
+        generator = new Random();
 
         // Initializing model Array with Dots
-        for (int i=0; i<widthOfGame; i++) {
+        for (int i=0; i<heigthOfGame; i++) {
 
-            for (int j=0; j<heigthOfGame; j++) {
+            for (int j=0; j<widthOfGame; j++) {
 
-                model[i][j]= new DotInfo(i,j);
+                model[i][j]= new DotInfo(j,i);
                 
             }
         }
@@ -85,8 +81,8 @@ public class GameModel {
         for (int s=0; s<numberOfMines ; s++) {
 
             // Generating random x and y values
-            int i=generator.nextInt(widthOfGame);
-            int j=generator.nextInt(heigthOfGame);
+            int i=generator.nextInt(heigthOfGame);
+            int j=generator.nextInt(widthOfGame);
 
             // If the random point (x,y) doesn't contain a mine, place a mine
             // This is done because the generator might generate a point that has already been mined before
@@ -98,9 +94,9 @@ public class GameModel {
         }
 
         // For loops used to count the number of neighboring mines for a non-mined tile
-        for (int i=0; i<widthOfGame; i++) {
+        for (int i=0; i<heigthOfGame; i++) {
 
-            for (int j=0; j<heigthOfGame; j++) {
+            for (int j=0; j<widthOfGame; j++) {
 
                 // If the tile is not mined, get the number of neighboring mines
                 if (!(model[i][j].isMined())) {
@@ -109,11 +105,11 @@ public class GameModel {
                     int neighbMines=0;
 
                     // We need to check the tiles to the left, right, above and below the current tile
-                    for (int a=i-1; a<i+2; a++) {
+                    for (int a=j-1; a<j+2; a++) {
 
-                        for (int b=j-1; b<j+2; b++) {
+                        for (int b=i-1; b<i+2; b++) {
 
-                            if (a>=0 && b>=0 && a<widthOfGame && b<heigthOfGame) {
+                            if (a>=0 && b>=0 && a<heigthOfGame && b<widthOfGame) {
 
                                 // If the tile is mined, increment neighbMines by 1
                                 if (model[a][b].isMined()) {
@@ -175,7 +171,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j].isMined();
+        return model[j][i].isMined();
 
     }
 
@@ -193,7 +189,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j].hasBeenClicked();
+        return model[j][i].hasBeenClicked();
 
     }
 
@@ -211,7 +207,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j].getNeighbooringMines()==0;
+        return model[j][i].getNeighbooringMines()==0;
 
     }
     /**
@@ -227,7 +223,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j].isCovered();
+        return model[j][i].isCovered();
 
     }
 
@@ -245,7 +241,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j].getNeighbooringMines();
+        return model[j][i].getNeighbooringMines();
 
     }
 
@@ -262,7 +258,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        model[i][j].uncover();
+        model[j][i].uncover();
 
     }
 
@@ -278,7 +274,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        model[i][j].click();
+        model[j][i].click();
 
     }
      /**
@@ -292,9 +288,9 @@ public class GameModel {
 
             for (int j=0; j<heigthOfGame; j++) {
 
-                if (model[i][j].isCovered()) {
+                if (model[j][i].isCovered()) {
 
-                    model[i][j].uncover();
+                    model[j][i].uncover();
                     
                 }
             }
@@ -333,7 +329,7 @@ public class GameModel {
         
     // ADD YOU CODE HERE
 
-        return model[i][j];
+        return model[j][i];
 
     }
 
@@ -364,17 +360,22 @@ public class GameModel {
 
         for (int i=0; i<widthOfGame; i++) {
 
-            for (int j=0; j<widthOfGame; j++) {
+            for (int j=0; j<heigthOfGame; j++) {
 
+<<<<<<< HEAD
                 // If the tile is not mined and uncovered
                 if (!(model[i][j].isMined()) && !(model[i][j].isCovered()) or (model[i][j].isMined()) && (model[i][j].isCovered())) 
                 {
+=======
+                // If the tile is mined and uncovered, game ends
+                if (model[j][i].isMined() && !(model[j][i].isCovered())) {
+>>>>>>> 44b71178bfc229beda9abe3ffdfb6e61537c9dc1
 
                     temp=true;
                     
                 }
 
-                // If one or both of the conditions fail
+                // If no uncovered tile is mined, game continues
                 else {
                     return false;
                 }
@@ -397,9 +398,9 @@ public class GameModel {
         // Used to store the tiles
         String temp="";
 
-        for (int j=0; j<widthOfGame; j++) {
+        for (int i=0; i<widthOfGame; i++) {
 
-            for (int i=0; i<heigthOfGame; i++) {
+            for (int j=0; j<heigthOfGame; j++) {
 
                 // If the tile is covered
                 if (model[i][j].isCovered()) {
@@ -420,11 +421,11 @@ public class GameModel {
 
                     temp+=model[i][j].getNeighbooringMines()+" ";
                     
-                }
-
-                // Indent a line after each row is added to variable temp
-                temp+="\n";       
+                }       
             }
+
+            // Indent a line after each row is added to variable temp
+                temp+="\n";
         }
 
         return temp;
