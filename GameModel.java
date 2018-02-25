@@ -362,13 +362,8 @@ public class GameModel {
 
             for (int j=0; j<heigthOfGame; j++) {
 
-
-                // If the tile is not mined and uncovered
-                if (!(model[i][j].isMined()) && !(model[i][j].isCovered()) or (model[i][j].isMined()) && (model[i][j].isCovered())) 
-                {
-              // If the tile is mined and uncovered, game ends
+                // If the tile is mined and uncovered, game ends
                 if (model[j][i].isMined() && !(model[j][i].isCovered())) {
-
 
                     temp=true;
                     
@@ -376,7 +371,7 @@ public class GameModel {
 
                 // If no uncovered tile is mined, game continues
                 else {
-                    return false;
+                    temp=false;
                 }
             }
         }
@@ -397,9 +392,9 @@ public class GameModel {
         // Used to store the tiles
         String temp="";
 
-        for (int i=0; i<widthOfGame; i++) {
+        for (int i=0; i<heigthOfGame; i++) {
 
-            for (int j=0; j<heigthOfGame; j++) {
+            for (int j=0; j<widthOfGame; j++) {
 
                 // If the tile is covered
                 if (model[i][j].isCovered()) {
@@ -422,6 +417,7 @@ public class GameModel {
                     
                 }       
             }
+
             // Indent a line after each row is added to variable temp
                 temp+="\n";
         }
