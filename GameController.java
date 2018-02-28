@@ -192,8 +192,16 @@ public class GameController implements ActionListener {
      */
     private void clearZone(DotInfo initialDot) {
 
-
-    // ADD YOU CODE HERE
+        // stack = new Stack(gameModel.getHeigth()*gameModel.getWidth());
+        // stack.push(initialDot);
+        // while(stack.isEmpty()){
+        //     temp = stack.peek()
+        //     stack.pop()
+        //     for(int i=0){
+                
+        //     }
+        // }
+    
 
     }
 
