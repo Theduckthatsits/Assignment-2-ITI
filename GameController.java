@@ -192,19 +192,127 @@ public class GameController implements ActionListener {
      */
     private void clearZone(DotInfo initialDot) {
 
-        // stack = new Stack(gameModel.getHeigth()*gameModel.getWidth());
+        // GenericArrayStack stack = new GenericArrayStack(gameModel.getHeigth()*gameModel.getWidth());
         // stack.push(initialDot);
-        // while(stack.isEmpty()){
-        //     temp = stack.peek()
-        //     stack.pop()
-        //     for(int i=0){
-                
+        // while(!stack.isEmpty()){
+        //     DotInfo D = stack.peek();
+        //     stack.pop();
+            
+        //     if(D.getX()>=2 && D.getX()<gameModel.getWidth() && D.getY()>=2 && D.getY()<gameModel.getHeigth()){
+        //         DotInfo[] N = new DotInfo[8];
+        //         int t =0;
+        //         for(int i=-1; i==1; i++){
+        //             for(int j=-1; j==1; j++){
+        //                 if(i==0 && j==0){
+        //                 N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                 t += 1;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     else if(D.getX()>=2 && D.getX()<gameModel.getWidth()^D.getY()>=2 && D.getY()<gameModel.getHeigth()){
+        //         DotInfo[] N = new DotInfo[5];
+        //         if(D.getX()>=2){
+        //             int t =0;
+        //             for(int i=0; i==1; i++){
+        //                 for(int j=-1; j==1; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getY()<gameModel.getHeigth()){
+        //             int t =0;
+        //             for(int i=-1; i==1; i++){
+        //                 for(int j=-1; j==0; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getX()<gameModel.getWidth()){
+        //             int t =0;
+        //             for(int i=-1; i==0; i++){
+        //                 for(int j=-1; j==1; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getY()<=2){
+        //             int t =0;
+        //             for(int i=-1; i==1; i++){
+        //                 for(int j=0; j==1; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     else{
+        //         Dotinfo[] N = new DotInfo[3];
+        //         if(D.getX()>=2 && D.getY()>=2){
+        //             int t =0;
+        //             for(int i=0; i==1; i++){
+        //                 for(int j=0; j==1; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getX()>=2 && D.getY()<gameModel.getHeigth()){
+        //             int t =0;
+        //             for(int i=0; i==1; i++){
+        //                 for(int j=-1; j==0; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getX()<gameModel.getWidth() && D.getY()>=2){
+        //             int t =0;
+        //             for(int i=-1; i==0; i++){
+        //                 for(int j=0; j==1; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         else if(D.getX()<gameModel.getWidth() && D.getY()<gameModel.getHeigth()){
+        //             int t =0;
+        //             for(int i=-1; i==0; i++){
+        //                 for(int j=-1; j==0; j++){
+        //                     if(i==0 && j==0){
+        //                         N[t]=DotInfo(D.getX()+i,D.getY()+j);
+        //                         t += 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     for(int i=0; i<N.length; i++){
+        //         if(N[i].isCovered()){
+        //             N[i].uncover();
+        //             if(N[i].getNeighbooringMines()=0){
+        //                 stack.push(N[i]);
+        //             }
+        //         }
         //     }
         // }
-    
-
     }
-
-
-
 }
